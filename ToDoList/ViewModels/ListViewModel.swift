@@ -37,4 +37,19 @@ class ListViewModel: ObservableObject {
         let newItem = ItemModel(title: title, isCompleted: false)
         items.append(newItem)
     }
+    
+    func undateItem(item: ItemModel) {
+        
+        if let index = items.firstIndex(where: { (existingItem) -> Bool in
+            return existingItem.id == item.id
+        }) {
+            items[index] = item.updateCompletion()
+        }
+    }
+    
+    
 }
+
+
+
+

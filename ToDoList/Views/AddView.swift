@@ -13,6 +13,8 @@ struct AddView: View {
     @EnvironmentObject var listViewModel: ListViewModel
     @State var textFieldText: String = ""
     @State var someColor = #colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)
+    @State var alarmTitle: String = ""
+    @State var showAlarm: Bool = false
     
     var body: some View {
         ScrollView {
@@ -35,11 +37,28 @@ struct AddView: View {
             .padding(14)
         }
         .navigationTitle("Add an Item 🖊️")
+        .alert(isPresented: $showAlarm, content: getAlarm)
     }
     
     func saveButtonPressed() {
-        listViewModel.addItem(title: textFieldText)
-        presentationMode.wrappedValue.dismiss()
+        if textIsAppropriate() {
+            listViewModel.addItem(title: textFieldText)
+            presentationMode.wrappedValue.dismiss()
+        }
+         
+    }
+    
+    func textIsAppropriate() -> Bool {
+        if textFieldText.count < 3 {
+            alarmTitle = "Your new todo item must be at least 3 characters long!"
+            showAlarm.toggle()
+            return false
+        }
+        return true
+    }
+    
+    func getAlarm() -> Alert {
+        return Alert(title: Text(alarmTitle))
     }
 }
 
