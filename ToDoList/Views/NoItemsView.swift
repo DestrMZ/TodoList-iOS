@@ -23,7 +23,7 @@ struct NoItemsView: View {
                 NavigationLink(
                     destination: AddView(),
                     label: {
-                        Text("Add new task! 🧑🏼‍💻")
+                        Text("Add a task! 🧑🏼‍💻")
                             .foregroundStyle(.white)
                             .font(.headline)
                             .frame(height: 55)

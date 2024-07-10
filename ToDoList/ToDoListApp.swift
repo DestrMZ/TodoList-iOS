@@ -17,7 +17,7 @@ struct ToDoListApp: App {
             NavigationView {
                 ListView()
             }
-            .environmentObject(listViewModel)
+                .environmentObject(listViewModel)
         }
     }
 }

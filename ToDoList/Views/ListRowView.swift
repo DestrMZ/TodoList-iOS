@@ -9,17 +9,45 @@ import SwiftUI
 
 struct ListRowView: View {
     
+    let threeAccentColor = Color("ThreeAccentColor")
+    @State var opacity: Double = 1.0
     let item: ItemModel
     
     var body: some View {
-        HStack {
-            Image(systemName: item.isCompleted ? "checkmark.circle" : "circle")
-                .foregroundColor(item.isCompleted ? .green : .red)
-            Text(item.title)
-            Spacer()
+        
+        VStack {
+            
+            HStack(spacing: 16) {
+                
+                Image(systemName: item.isCompleted ? "checkmark.circle.fill" : "circle")
+                        .foregroundColor(item.isCompleted ? .green : .red)
+                
+                
+                VStack(alignment: .leading, spacing: 4.0) {
+                    
+                    Text(item.title)
+                        .lineLimit(1)
+                        .frame(maxWidth: .infinity, alignment: .leading) 
+                }
+                    .layoutPriority(1)
+                Spacer()
+            }
+            
         }
-        .font(.title3)
-        .padding(.vertical, 8)
+        .padding()
+        .foregroundColor(.white)
+        .background(threeAccentColor) // .opacity(0.8)
+//        .frame(maxWidth: .infinity, alignment: .leading)
+        .cornerRadius(8.0)
+        .padding([.horizontal], 5.0)
+        .padding(5) // [.bottom]
+        .opacity(opacity)
+        .frame(maxWidth: .infinity)
+        .onAppear {
+            withAnimation {
+                self.opacity = 1.0
+            }
+        }
     }
 }
 

@@ -57,6 +57,13 @@ class ListViewModel: ObservableObject {
             UserDefaults.standard.set(encodedData, forKey: itemsKey)
         }
     }
+    
+    func getCurrentData() -> String {
+        let date = Date()
+        let dataFormatter = DateFormatter()
+        dataFormatter.dateFormat = "EEEE, d MMMM"
+        return dataFormatter.string(from: date)
+    }
 }
 
 
