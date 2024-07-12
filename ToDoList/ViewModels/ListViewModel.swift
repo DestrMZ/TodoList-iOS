@@ -38,12 +38,12 @@ class ListViewModel: ObservableObject {
         items.move(fromOffsets: from, toOffset: to)
     }
     
-    func addItem(title: String) {
-        let newItem = ItemModel(title: title, isCompleted: false)
+    func addItem(title: String, due_date: String) {
+        let newItem = ItemModel(title: title, isCompleted: false, dueDate: due_date)
         items.append(newItem)
     }
     
-    func undateItem(item: ItemModel) {
+    func updateItem(item: ItemModel) {
         
         if let index = items.firstIndex(where: { (existingItem) -> Bool in
             return existingItem.id == item.id
@@ -64,8 +64,15 @@ class ListViewModel: ObservableObject {
         dataFormatter.dateFormat = "EEEE, d MMMM"
         return dataFormatter.string(from: date)
     }
+    
+    var incompleteItems: [ItemModel] {
+        items.filter { !$0.isCompleted }
+    }
+    
+    var completedItems: [ItemModel] {
+        items.filter { $0.isCompleted }
+    }
 }
-
 
 
 

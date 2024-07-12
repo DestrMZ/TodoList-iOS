@@ -26,8 +26,13 @@ struct ListRowView: View {
                 VStack(alignment: .leading, spacing: 4.0) {
                     
                     Text(item.title)
+                        .font(.subheadline)
                         .lineLimit(1)
                         .frame(maxWidth: .infinity, alignment: .leading) 
+                    Text("Due: \(item.dueDate)") 
+                        .font(.subheadline)
+                        .foregroundColor(Color.gray)
+                        
                 }
                     .layoutPriority(1)
                 Spacer()
@@ -36,11 +41,10 @@ struct ListRowView: View {
         }
         .padding()
         .foregroundColor(.white)
-        .background(threeAccentColor) // .opacity(0.8)
-//        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(threeAccentColor)
         .cornerRadius(8.0)
         .padding([.horizontal], 5.0)
-        .padding(5) // [.bottom]
+        .padding(5)
         .opacity(opacity)
         .frame(maxWidth: .infinity)
         .onAppear {
@@ -51,21 +55,13 @@ struct ListRowView: View {
     }
 }
 
-var item1 = ItemModel(title: "First item!", isCompleted: false)
-var item2 = ItemModel(title: "Second item!", isCompleted: true)
-
-//#Preview("This is the first title", traits: .sizeThatFitsLayout) {
-//    ListRowView(item: ItemModel(title: "This is the first item", isCompleted: false))
-//}
-//
-//#Preview("It's second title", traits: .sizeThatFitsLayout) {
-//    ListRowView(item: ItemModel(title: "It's second title", isCompleted: true))
-//}
+var item1 = ItemModel(title: "First item!", isCompleted: false, dueDate: "2024-07-12")
+var item2 = ItemModel(title: "Second item!", isCompleted: true, dueDate: "2024-07-12")
 
 
 #Preview("Main title", traits: .sizeThatFitsLayout) {
     Group {
-        ListRowView(item: ItemModel(title: "This is the first title", isCompleted: false))
-        ListRowView(item: ItemModel(title: "It's second title", isCompleted: true))
+        ListRowView(item: item1)
+        ListRowView(item: item2)
     }
 }
