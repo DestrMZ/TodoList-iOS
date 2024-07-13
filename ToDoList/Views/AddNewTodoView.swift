@@ -28,7 +28,7 @@ struct AddNewTodoView: View {
             Form {
                 TextField("Enter a title", text: $todoTitle, axis: .vertical)
                 
-                DatePicker("Completion date", selection: $todoDueDate, displayedComponents: .date)
+                DatePicker("Pick a date", selection: $todoDueDate, displayedComponents: .date)
                     .onChange(of: todoDueDate) {_, newDate in
                         updateDueDateString(from: newDate)
                     }

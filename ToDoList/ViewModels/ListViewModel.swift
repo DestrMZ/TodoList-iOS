@@ -58,6 +58,12 @@ class ListViewModel: ObservableObject {
         }
     }
     
+    func updateExistingItem(item: ItemModel, title: String, dueDate: String) {
+        if let index = items.firstIndex(where: { $0.id == item.id }) {
+            items[index] = ItemModel(id: item.id, title: title, isCompleted: item.isCompleted, dueDate: dueDate)
+        }
+    }
+    
     func getCurrentData() -> String {
         let date = Date()
         let dataFormatter = DateFormatter()

@@ -19,7 +19,7 @@ struct ListView: View {
         VStack {
             
             HStack {
-                Text(listViewModel.getCurrentData()) // Показываем текущую дату
+                Text(listViewModel.getCurrentData())
                     .font(.title3)
                     .fontWeight(.semibold)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -29,18 +29,15 @@ struct ListView: View {
             
             ZStack {
                 if listViewModel.items.isEmpty {
-                    // Показываем NoItemsView, если задач нет
                     NoItemsView()
                         .transition(AnyTransition.opacity.animation(.easeIn))
                 } else {
                     List {
-                        // Не завершенные задачи
                         if !listViewModel.incompleteItems.isEmpty {
                             Section(header: Text("Incomplete")) {
                                 ForEach(listViewModel.incompleteItems) { item in
                                     ListRowView(item: item)
                                         .onTapGesture {
-                                            // Обновляем задачу при нажатии
                                             withAnimation(.linear) {
                                                 listViewModel.updateItem(item: item)
                                             }
@@ -53,13 +50,11 @@ struct ListView: View {
                             }
                         }
                         
-                        // Завершенные задачи
                         if !listViewModel.completedItems.isEmpty {
                             Section(header: Text("Completed")) {
                                 ForEach(listViewModel.completedItems) { item in
                                     ListRowView(item: item)
                                         .onTapGesture {
-                                            // Обновляем задачу при нажатии
                                             withAnimation(.linear) {
                                                 listViewModel.updateItem(item: item)
                                             }
@@ -74,13 +69,13 @@ struct ListView: View {
                     }
                 }
             }
-            .listStyle(InsetGroupedListStyle()) // Используем стиль с секциями
+            .listStyle(InsetGroupedListStyle())
             .navigationTitle("My day")
             .navigationBarItems(
-                leading: EditButton(), // Кнопка редактирования
+                leading: EditButton(),
                 trailing:
                     Button(action: {
-                        showAddNewSheet.toggle() // Показываем окно добавления новой задачи
+                        showAddNewSheet.toggle()
                     }) {
                         Text("Add")
                     }

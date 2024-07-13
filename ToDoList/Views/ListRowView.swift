@@ -11,7 +11,9 @@ struct ListRowView: View {
     
     let threeAccentColor = Color("ThreeAccentColor")
     @State var opacity: Double = 1.0
+    @State private var showEditSheet = false
     let item: ItemModel
+    @EnvironmentObject var viewModel: ListViewModel
     
     var body: some View {
         
@@ -51,6 +53,18 @@ struct ListRowView: View {
             withAnimation {
                 self.opacity = 1.0
             }
+        }
+        .contextMenu {
+            Button(action: {
+                showEditSheet.toggle()
+            }) {
+                Text("Edit")
+                Image(systemName: "pencil")
+            }
+        }
+        .sheet(isPresented: $showEditSheet) {
+            EditTodoView(item: item)
+                .environmentObject(viewModel)
         }
     }
 }
