@@ -2,7 +2,7 @@
 
 Basic to-do list app for iOS devices using Swift 6, Swift UI and Xcode!
 
-![Screenshot](https://github.com/user-attachments/assets/374d16c5-753e-4af6-bfc9-b9e73a2d9135)
+![image (1)](https://github.com/user-attachments/assets/07fc724c-591f-40ac-a35d-55507af55c8e)
 
 ## Requirements
 
