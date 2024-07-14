@@ -39,7 +39,7 @@ class ListViewModel: ObservableObject {
     }
     
     func addItem(title: String, due_date: String) {
-        let newItem = ItemModel(title: title, isCompleted: false, dueDate: due_date)
+        let newItem = ItemModel(title: title, isCompleted: false, dueDate: due_date, isPriority: false)
         items.append(newItem)
     }
     
@@ -47,6 +47,15 @@ class ListViewModel: ObservableObject {
         
         if let index = items.firstIndex(where: { (existingItem) -> Bool in
             return existingItem.id == item.id
+        }) {
+            items[index] = item.updateCompletion()
+        }
+    }
+    
+    func priorityItem(item: ItemModel) {
+        
+        if let index = items.firstIndex(where: { (priorityItem) -> Bool in
+            return priorityItem.id == item.id
         }) {
             items[index] = item.updateCompletion()
         }
@@ -60,7 +69,7 @@ class ListViewModel: ObservableObject {
     
     func updateExistingItem(item: ItemModel, title: String, dueDate: String) {
         if let index = items.firstIndex(where: { $0.id == item.id }) {
-            items[index] = ItemModel(id: item.id, title: title, isCompleted: item.isCompleted, dueDate: dueDate)
+            items[index] = ItemModel(id: item.id, title: title, isCompleted: item.isCompleted, dueDate: dueDate, isPriority: item.isPriority)
         }
     }
     

@@ -9,11 +9,12 @@ import SwiftUI
 
 struct ListRowView: View {
     
-    let threeAccentColor = Color("ThreeAccentColor")
+    @EnvironmentObject var viewModel: ListViewModel
+    
     @State var opacity: Double = 1.0
     @State private var showEditSheet = false
     let item: ItemModel
-    @EnvironmentObject var viewModel: ListViewModel
+    let threeAccentColor = Color("ThreeAccentColor")
     
     var body: some View {
         
@@ -21,9 +22,9 @@ struct ListRowView: View {
             
             HStack(spacing: 16) {
                 
+
                 Image(systemName: item.isCompleted ? "checkmark.circle.fill" : "circle")
                         .foregroundColor(item.isCompleted ? .green : .red)
-                
                 
                 VStack(alignment: .leading, spacing: 4.0) {
                     
@@ -37,7 +38,13 @@ struct ListRowView: View {
                         
                 }
                     .layoutPriority(1)
+                
                 Spacer()
+                
+                Image(systemName: item.isPriority ? "star.fill" : "star")
+                    .foregroundColor(item.isPriority ? .yellow : .gray)
+                
+                
             }
             
         }
@@ -69,8 +76,8 @@ struct ListRowView: View {
     }
 }
 
-var item1 = ItemModel(title: "First item!", isCompleted: false, dueDate: "2024-07-12")
-var item2 = ItemModel(title: "Second item!", isCompleted: true, dueDate: "2024-07-12")
+var item1 = ItemModel(title: "First item!", isCompleted: false, dueDate: "2024-07-12", isPriority: true)
+var item2 = ItemModel(title: "Second item!", isCompleted: true, dueDate: "2024-07-12", isPriority: false)
 
 
 #Preview("Main title", traits: .sizeThatFitsLayout) {

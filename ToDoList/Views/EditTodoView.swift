@@ -69,6 +69,6 @@ struct EditTodoView: View {
 }
 
 #Preview {
-    EditTodoView(item: ItemModel(title: "Example task", isCompleted: false, dueDate: "2024-07-12"))
+    EditTodoView(item: ItemModel(title: "Example task", isCompleted: false, dueDate: "2024-07-12", isPriority: false))
         .environmentObject(ListViewModel())
 }
